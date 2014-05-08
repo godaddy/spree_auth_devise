@@ -7,7 +7,7 @@ class Spree::Admin::UserSessionsController < Devise::SessionsController
 
   helper 'spree/admin/navigation'
   helper 'spree/admin/tables'
-  layout 'spree/layouts/admin'
+  layout false
 
   ssl_required :new, :create, :destroy, :update
 
