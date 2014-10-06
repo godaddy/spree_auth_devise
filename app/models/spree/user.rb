@@ -7,6 +7,7 @@ module Spree
 
     devise :database_authenticatable, :registerable, :recoverable,
            :rememberable, :trackable, :validatable, :encryptable, :encryptor => 'authlogic_sha512'
+    devise :confirmable if Spree::Auth::Config[:confirmable]
 
     has_many :orders
 
@@ -42,6 +43,14 @@ module Spree
       def set_login
         # for now force login to be same as email, eventually we will make this configurable, etc.
         self.login ||= self.email if self.email
+      end
+
+      def scramble_email_and_password
+        self.email = SecureRandom.uuid + "@example.net"
+        self.login = self.email
+        self.password = SecureRandom.hex(8)
+        self.password_confirmation = self.password
+        self.save
       end
   end
 end
