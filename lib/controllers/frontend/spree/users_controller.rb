@@ -25,12 +25,11 @@ class Spree::UsersController < Spree::StoreController
   end
 
   def update
-    if @user.update_attributes(user_params)
-      if params[:user][:password].present?
-        # this logic needed b/c devise wants to log us out after password changes
-        user = Spree::User.reset_password_by_token(params[:user])
-        sign_in(@user, :event => :authentication, :bypass => !Spree::Auth::Config[:signout_after_password_change])
-      end
+    if @user.update_with_password(user_params)
+      # this logic needed b/c devise wants to log us out after password changes
+      user = Spree::User.reset_password_by_token(params[:user])
+      # set bypass to true so that devise doesn't log us out after password changes
+      sign_in(@user, :event => :authentication, :bypass => true)
       redirect_to spree.account_url, :notice => Spree.t(:account_updated)
     else
       render :edit
@@ -38,8 +37,9 @@ class Spree::UsersController < Spree::StoreController
   end
 
   private
+
     def user_params
-      params.require(:user).permit(Spree::PermittedAttributes.user_attributes)
+      params.require(:user).permit(Spree::PermittedAttributes.user_attributes + [:current_password])
     end
 
     def load_object
