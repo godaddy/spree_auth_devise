@@ -13,11 +13,9 @@ class Spree::UsersController < Spree::StoreController
   def create
     @user = Spree::User.new(user_params)
     if @user.save
-
       if current_order
         session[:guest_token] = nil
       end
-
       redirect_back_or_default(root_url)
     else
       render :new
@@ -25,8 +23,7 @@ class Spree::UsersController < Spree::StoreController
   end
 
   def update
-    successful_update = @user.has_password? ? @user.update_with_password(user_with_password_params) : @user.update_without_password(user_params) && @user.set_has_password!
-    if successful_update
+    if @user.update_with_password(user_params)
       # this logic needed b/c devise wants to log us out after password changes
       user = Spree::User.reset_password_by_token(params[:user])
       # set bypass to true so that devise doesn't log us out after password changes
@@ -40,10 +37,6 @@ class Spree::UsersController < Spree::StoreController
   private
 
     def user_params
-      params.require(:user).permit(Spree::PermittedAttributes.user_attributes)
-    end
-
-    def user_with_password_params
       params.require(:user).permit(Spree::PermittedAttributes.user_attributes + [:current_password])
     end
 
