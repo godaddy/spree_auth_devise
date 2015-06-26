@@ -26,7 +26,6 @@ class Spree::UsersController < Spree::StoreController
     if @user.update_with_password(user_params)
       # this logic needed b/c devise wants to log us out after password changes
       user = Spree::User.reset_password_by_token(params[:user])
-      # set bypass to true so that devise doesn't log us out after password changes
       sign_in(@user, :event => :authentication, :bypass => true)
       redirect_to spree.account_url, :notice => Spree.t(:account_updated)
     else

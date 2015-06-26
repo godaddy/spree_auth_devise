@@ -11,17 +11,25 @@ describe Spree::UsersController do
 
   context '#create' do
     it 'create a new user' do
-      spree_post :create, { user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' } }
+      spree_put :create, { user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' } }
       expect(assigns[:user].new_record?).to be_false
     end
   end
 
   context '#update' do
-    context 'when updating own account' do
-      it 'perform update' do
-        spree_put :update, { user: { email: 'mynew@email-address.com' } }
-        expect(assigns[:user].email).to eq 'mynew@email-address.com'
-        expect(response).to redirect_to spree.account_url(only_path: true)
+
+    context 'updating own account with correct current password' do
+      it 'updates email' do
+        expect{spree_put :update, { user: {email: 'email@email.com', current_password: 'secret'} }}.to change{Spree::User.find(user).email}
+      end
+    end
+
+    context 'updating own account' do
+      it 'fails with incorrect password' do
+        expect{spree_put :update, { user: {email: 'email@email.com', current_password: 'incorrectPassword'} }}.to_not change{Spree::User.find(user).email}
+      end
+      it 'fails without current password' do
+        expect{spree_put :update, { user: {login: 'email@email.com'} }}.to_not change{Spree::User.find(user).email}
       end
     end
 
