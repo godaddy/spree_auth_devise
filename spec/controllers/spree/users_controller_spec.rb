@@ -18,13 +18,10 @@ describe Spree::UsersController do
 
   context '#update' do
 
-    context 'updating own account with correct current password' do
-      it 'updates email' do
+    context 'updating own account' do
+      it 'updates email with correct current password' do
         expect{spree_put :update, { user: {email: 'email@email.com', current_password: 'secret'} }}.to change{Spree::User.find(user).email}
       end
-    end
-
-    context 'updating own account' do
       it 'fails with incorrect password' do
         expect{spree_put :update, { user: {email: 'email@email.com', current_password: 'incorrectPassword'} }}.to_not change{Spree::User.find(user).email}
       end

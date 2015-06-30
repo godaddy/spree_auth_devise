@@ -5,7 +5,6 @@ module Spree
       include Core::UserPaymentSource
     end
 
-
     devise :database_authenticatable, :registerable, :recoverable,
            :rememberable, :trackable, :validatable, :encryptable, :encryptor => 'authlogic_sha512'
 
@@ -28,8 +27,8 @@ module Spree
     def admin?
       has_spree_role?('admin')
     end
-    protected
 
+    protected
       def password_required?
         !persisted? || password.present? || password_confirmation.present?
       end
