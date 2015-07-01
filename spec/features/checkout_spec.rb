@@ -14,12 +14,11 @@ feature 'Checkout', js: true do
   given!(:address) { create(:address, state: state, country: country) }
 
   background do
-    ActionMailer::Base.default_url_options[:host] = 'http://example.com'
     @product = create(:product, name: 'RoR Mug')
     @product.master.stock_items.first.update_column(:count_on_hand, 1)
 
-    ActionMailer::Base.default_url_options[:host] = 'http://example.com'
     Spree::Config[:enable_mail_delivery] = true
+    Spree::Config.site_url = 'http://example.com'
 
     # Bypass gateway error on checkout | ..or stub a gateway
     Spree::Config[:allow_checkout_on_gateway_error] = true
