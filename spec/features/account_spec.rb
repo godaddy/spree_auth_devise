@@ -28,6 +28,7 @@ feature 'Accounts' do
       expect(page).to have_text 'email@person.com'
       click_link 'Edit'
 
+      fill_in 'Current Password', with: 'password'
       fill_in 'Password', with: 'foobar'
       fill_in 'Password Confirmation', with: 'foobar'
       click_button 'Update'
@@ -49,6 +50,7 @@ feature 'Accounts' do
       expect(page).to have_text 'email@person.com'
       click_link 'Edit'
 
+      fill_in 'Current Password', with: user.password
       fill_in 'Password', with: 'foobar'
       fill_in 'Password Confirmation', with: 'foobar'
       click_button 'Update'

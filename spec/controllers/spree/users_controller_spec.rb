@@ -9,22 +9,27 @@ describe Spree::UsersController do
     controller.stub spree_current_user: user
   end
 
+  context '#load_object' do
+    it 'redirects to login path if user is not found' do
+      allow(controller).to receive(:spree_current_user) { nil }
+      spree_put :update, { user: { email: 'foobar@example.com' } }
+      expect(response).to redirect_to spree.login_path
+    end
+  end
+
   context '#create' do
     it 'create a new user' do
-      spree_put :create, { user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' } }
-      expect(assigns[:user].new_record?).to be_false
+      spree_post :create, { user: { email: 'foobar@example.com', password: 'foobar123', password_confirmation: 'foobar123' } }
+      expect(assigns[:user].new_record?).to be false
     end
   end
 
   context '#update' do
 
-    context 'updating own account with correct current password' do
-      it 'updates email' do
+    context 'updating own account' do
+      it 'updates email with correct current password' do
         expect{spree_put :update, { user: {email: 'email@email.com', current_password: 'secret'} }}.to change{Spree::User.find(user).email}
       end
-    end
-
-    context 'updating own account' do
       it 'fails with incorrect password' do
         expect{spree_put :update, { user: {email: 'email@email.com', current_password: 'incorrectPassword'} }}.to_not change{Spree::User.find(user).email}
       end
