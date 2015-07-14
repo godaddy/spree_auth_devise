@@ -5,6 +5,10 @@
   
   <div data-hook="account_edit">
     <%= form_for Spree::User.new, :as => @user, :url => spree.user_path(@user), :method => :put do |f| %>
+      <p>
+        <%= f.label :current_password, Spree.t(:current_password) %><br />
+        <%= f.password_field :current_password, :class => 'title' %>
+      </p>
       <%= render :partial => 'spree/shared/user_form', :locals => { :f => f } %>
       <p>
         <%= f.submit Spree.t(:update), :class => 'button primary' %>
