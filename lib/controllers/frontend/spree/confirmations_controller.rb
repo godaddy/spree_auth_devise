@@ -1,4 +1,4 @@
-class Spree::UserConfirmationsController < Devise::ConfirmationsController
+class Spree::ConfirmationsController < Devise::ConfirmationsController
   helper 'spree/base', 'spree/store'
 
   if Spree::Auth::Engine.dash_available?
@@ -9,7 +9,6 @@ class Spree::UserConfirmationsController < Devise::ConfirmationsController
   include Spree::Core::ControllerHelpers::Common
   include Spree::Core::ControllerHelpers::Order
   include Spree::Core::ControllerHelpers::SSL
-  include Spree::Core::ControllerHelpers::Store
 
   ssl_required
 
