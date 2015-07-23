@@ -1,5 +1,7 @@
-Welcome <%= @email %>!
+<% unless @reconfirmation %>
+Welcome!
 
-You can confirm your account email through the link below:
+<% end %>
+Please confirm your account email for <%= Spree::Config.site_name %> through the link below:
 
-<%= link_to 'Confirm my account', @confirmation_url %>
+<%= @confirmation_url %>
