@@ -9,14 +9,9 @@ module Spree
     end
 
     def confirmation_instructions(user, token, opts={})
+      @user = user
       @confirmation_url = spree.spree_user_confirmation_url(:confirmation_token => token, :host => Spree::Config.site_url)
-      if user.respond_to?(:unconfirmed_email) && user.unconfirmed_email.present?
-        @email = user.unconfirmed_email
-        @reconfirmation = true
-      else
-        @email = user.email
-        @reconfirmation = false
-      end
+      @email = user.pending_reconfirmation? ? user.unconfirmed_email : user.email
       mail to: @email, from: from_address, subject: Spree::Config.site_name + ' ' + I18n.t(:subject, :scope => [:devise, :mailer, :confirmation_instructions])
     end
   end
