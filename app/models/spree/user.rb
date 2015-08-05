@@ -5,8 +5,9 @@ module Spree
       include Core::UserPaymentSource
     end
 
-    devise :database_authenticatable, :registerable, :recoverable, :confirmable,
+    devise :database_authenticatable, :registerable, :recoverable,
            :rememberable, :trackable, :validatable, :encryptable, :encryptor => 'authlogic_sha512'
+    devise :confirmable if Spree::Auth::Config[:confirmable]
 
     has_many :orders
 
@@ -36,7 +37,7 @@ module Spree
     private
 
       def check_completed_orders
-        raise DestroyWithOrdersError if orders.complete.present?
+        raise ::Spree::User::DestroyWithOrdersError if orders.complete.present?
       end
 
       def set_login

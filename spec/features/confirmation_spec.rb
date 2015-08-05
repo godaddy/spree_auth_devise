@@ -8,8 +8,6 @@ feature 'Confirmation' do
 
   after(:each) { set_confirmable_option(false) }
 
-  let!(:store) { create(:store) }
-
   background do
     ActionMailer::Base.default_url_options[:host] = 'http://example.com'
   end

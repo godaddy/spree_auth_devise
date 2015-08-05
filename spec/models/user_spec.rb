@@ -20,7 +20,7 @@ describe Spree::User do
       order = build(:order, completed_at: Time.now)
       order.save
       user = order.user
-      expect { user.destroy }.to raise_exception(Spree::User::DestroyWithOrdersError)
+      expect { user.destroy }.to raise_error(Spree::User::DestroyWithOrdersError)
     end
   end
 

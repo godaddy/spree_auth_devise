@@ -9,9 +9,12 @@ module Spree
     end
 
     def confirmation_instructions(user, token, opts={})
+      #hack so that confirmable module is still used after first confirmation
+      Spree::Auth::Config[:confirmable] = true
       @user = user
-      @confirmation_url = spree.spree_user_confirmation_url(:confirmation_token => token, :host => Spree::Config.site_url)
-      @email = user.pending_reconfirmation? ? user.unconfirmed_email : user.email
+      host = Spree::Config.site_url.present? ? Spree::Config.site_url : "no_site_url"
+      @confirmation_url = spree.spree_user_confirmation_url(:confirmation_token => token, :host => host)
+      @email = @user.pending_reconfirmation? ? @user.unconfirmed_email : @user.email
       mail to: @email, from: from_address, subject: Spree::Config.site_name + ' ' + I18n.t(:subject, :scope => [:devise, :mailer, :confirmation_instructions])
     end
   end
