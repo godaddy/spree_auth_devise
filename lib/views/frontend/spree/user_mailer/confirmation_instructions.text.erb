@@ -1,0 +1,10 @@
+<% if @user.pending_reconfirmation?%>
+You recently made a request to change your account email.
+
+<% else %>
+Welcome!
+
+<% end %>
+You can confirm your account email for <%= Spree::Config.site_name %> through the link below:
+
+<%= @confirmation_url %>

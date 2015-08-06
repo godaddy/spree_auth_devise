@@ -20,8 +20,21 @@ describe Spree::User do
       order = build(:order, completed_at: Time.now)
       order.save
       user = order.user
+      expect { user.destroy }.to raise_error(Spree::User::DestroyWithOrdersError)
+    end
+  end
 
-      expect { user.destroy }.to raise_exception(Spree::User::DestroyWithOrdersError)
+  describe "confirmable" do
+    it "is confirmable if the confirmable option is enabled" do
+      set_confirmable_option(true)
+      Spree::UserMailer.stub(:confirmation_instructions).and_return(double(deliver: true))
+      expect(Spree::User.devise_modules).to include(:confirmable)
+      set_confirmable_option(false)
+    end
+
+    it "is not confirmable if the confirmable option is disabled" do
+      set_confirmable_option(false)
+      expect(Spree::User.devise_modules).to_not include(:confirmable)
     end
   end
 end
