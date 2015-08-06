@@ -57,6 +57,7 @@ def create_admin_user
   else
     admin = Spree::User.new(attributes)
     if admin.save
+      admin.skip_confirmation! if Spree::User.method_defined?(:skip_confirmation!)
       role = Spree::Role.find_or_create_by(name: 'admin')
       admin.spree_roles << role
       admin.save
