@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'coffee-rails', '~> 4.0.1'
   s.add_development_dependency 'rspec-rails', '~> 3.4.1'
   s.add_development_dependency 'rspec-activemodel-mocks'
-  s.add_development_dependency 'factory_girl', '~> 4.4'
+  s.add_development_dependency 'factory_bot'
   s.add_development_dependency 'email_spec', '~> 1.5.0'
   s.add_development_dependency 'ffaker'
   s.add_development_dependency 'shoulda-matchers', '~> 1.5'
