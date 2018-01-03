@@ -18,7 +18,6 @@ feature 'Sign In' do
 
     expect(page).to have_text 'Logged in successfully'
     expect(page).not_to have_text 'Login'
-    expect(page).to have_text 'Logout'
     expect(current_path).to eq '/'
   end
 
@@ -39,7 +38,7 @@ feature 'Sign In' do
     fill_in 'Password', with: user.password
     click_button 'Login'
 
-    expect(page).to have_text 'Logged in as: admin@person.com'
+    expect(page).to have_text 'Logged in successfully'
     expect(current_path).to eq '/admin'
   end
 

@@ -11,13 +11,13 @@ feature 'Admin - Reset Password' do
     click_link 'Forgot Password?'
     fill_in 'Email', with: 'foobar@example.com'
     click_button 'Reset my password'
-    expect(page).to have_text 'You will receive an email with instructions'
+    expect(page).to have_content 'You will receive an email with instructions'
   end
 
   scenario 'shows errors if no email is supplied' do
     visit spree.admin_login_path
     click_link 'Forgot Password?'
     click_button 'Reset my password'
-    expect(page).to have_text "Email can't be blank"
+    expect(page).to have_content "Email can't be blank"
   end
 end
