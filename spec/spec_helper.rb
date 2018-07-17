@@ -8,7 +8,6 @@ require File.expand_path('../dummy/config/environment', __FILE__)
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'capybara/rails'
-require 'capybara/poltergeist'
 require 'shoulda-matchers'
 require 'ffaker'
 require 'database_cleaner'
@@ -28,8 +27,6 @@ RSpec.configure do |config|
   config.mock_with :rspec
   config.use_transactional_fixtures = false
 
-  # config.filter_run focus: true
-
   config.before :suite do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with :truncation
@@ -46,13 +43,13 @@ RSpec.configure do |config|
     Spree::Ability.abilities.delete(AbilityDecorator) if Spree::Ability.abilities.include?(AbilityDecorator)
   end
 
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
   config.include Spree::TestingSupport::UrlHelpers
-  config.include Spree::TestingSupport::ControllerRequests, :type => :controller
-  config.include Devise::TestHelpers, :type => :controller
-  config.include Rack::Test::Methods, :type => :feature
+  config.include Spree::TestingSupport::ControllerRequests, type: :controller
+  config.include Devise::TestHelpers, type: :controller
+  config.include Rack::Test::Methods, type: :feature
 
-  Capybara.javascript_driver = :poltergeist
+  Capybara.default_driver = :rack_test
 end
 
 if defined? CanCan::Ability

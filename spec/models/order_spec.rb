@@ -5,7 +5,7 @@ describe Spree::Order do
 
   context '#associate_user!' do
     let(:user) { mock_model Spree::User, email: 'spree@example.com', anonymous?: false }
-    before { order.stub(save!: true) }
+    before { allow(order).to receive(:save!).and_return(true) }
 
     it 'associate the order with the specified user' do
       order.associate_user! user

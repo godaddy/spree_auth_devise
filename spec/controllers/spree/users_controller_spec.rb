@@ -6,7 +6,7 @@ describe Spree::UsersController do
   let(:role) { create(:role) }
 
   before do
-    controller.stub spree_current_user: user
+    allow(controller).to receive(:spree_current_user).and_return(user)
   end
 
   context '#load_object' do
