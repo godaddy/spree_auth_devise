@@ -20,12 +20,9 @@ Gem::Specification.new do |s|
 
   spree_version = '~> 3.0.0'
   s.add_dependency 'spree_core', spree_version
-  s.add_dependency 'devise', '~> 4.3.0'
+  s.add_dependency 'devise', '~> 4.4.0'
   s.add_dependency 'devise-encryptable', '0.1.2'
   s.add_dependency 'cancancan', '~> 1.0'
-
-  s.add_dependency 'json'
-  s.add_dependency 'multi_json'
 
   s.add_development_dependency 'spree_backend', spree_version
   s.add_development_dependency 'spree_frontend', spree_version
@@ -39,7 +36,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'shoulda-matchers', '~> 3.1.2'
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'database_cleaner', '~> 1.7.0'
-  s.add_development_dependency 'simplecov', '~> 0.7.1'
+  s.add_development_dependency 'simplecov', '~> 0.15.0'
   s.add_development_dependency 'pry'
   s.add_development_dependency 'byebug'
 end
