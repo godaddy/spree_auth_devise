@@ -1,8 +1,8 @@
 class Spree::UsersController < Spree::StoreController
   ssl_required
-  skip_before_filter :set_current_order, :only => :show
-  prepend_before_filter :load_object, :only => [:show, :edit, :update]
-  prepend_before_filter :authorize_actions, :only => :new
+  skip_before_action :set_current_order, :only => :show
+  prepend_before_action :load_object, :only => [:show, :edit, :update]
+  prepend_before_action :authorize_actions, :only => :new
 
   include Spree::Core::ControllerHelpers
 

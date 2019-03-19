@@ -12,7 +12,7 @@ class Spree::UserRegistrationsController < Devise::RegistrationsController
 
   ssl_required
   before_action :check_permissions, :only => [:edit, :update]
-  skip_before_filter :require_no_authentication
+  skip_before_action :require_no_authentication
 
   # GET /resource/sign_up
   def new
