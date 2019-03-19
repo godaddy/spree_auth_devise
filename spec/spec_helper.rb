@@ -1,3 +1,4 @@
+require 'byebug'
 require 'simplecov'
 SimpleCov.start 'rails'
 
@@ -25,6 +26,8 @@ require 'spree/testing_support/capybara_ext'
 RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.mock_with :rspec
+  config.filter_run_when_matching :focus
+
   config.use_transactional_fixtures = false
 
   config.before :suite do
