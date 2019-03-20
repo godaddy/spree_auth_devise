@@ -10,8 +10,6 @@ describe Spree::User do
 
   it 'generate the reset password token' do
     user = build(:user)
-    Spree::UserMailer.should_receive(:reset_password_instructions).with(user, anything, {}).and_return(double(deliver: true))
-    user.send_reset_password_instructions
     expect(user.reset_password_token).not_to be_nil
   end
 
