@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spree/core/validators/email'
 Spree::CheckoutController.class_eval do
   before_action :check_authorization

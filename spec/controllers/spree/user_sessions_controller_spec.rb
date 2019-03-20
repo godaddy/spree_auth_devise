@@ -1,4 +1,4 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 describe Spree::UserSessionsController do
   let(:user) { create(:user) }

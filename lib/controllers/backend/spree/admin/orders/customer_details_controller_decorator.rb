@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Spree::Admin::Orders::CustomerDetailsController.class_eval do
   before_action :check_authorization
 

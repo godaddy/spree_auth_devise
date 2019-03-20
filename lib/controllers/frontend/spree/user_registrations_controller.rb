@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Spree::UserRegistrationsController < Devise::RegistrationsController
   helper 'spree/base', 'spree/store'
 

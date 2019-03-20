@@ -1,4 +1,4 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 describe Spree::CheckoutController do
   let(:order) { create(:order_with_totals, email: nil, user: nil) }

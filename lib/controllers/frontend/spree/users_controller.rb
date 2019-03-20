@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Spree::UsersController < Spree::StoreController
   ssl_required
   skip_before_action :set_current_order, :only => :show

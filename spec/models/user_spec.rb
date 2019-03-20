@@ -1,4 +1,4 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 describe Spree::User do
   before(:all) { Spree::Role.create name: 'admin' }

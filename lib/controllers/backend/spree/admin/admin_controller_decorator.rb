@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Spree::Admin::BaseController.class_eval do
 
   # Redirect as appropriate when an access request fails.  The default action is to redirect to the login screen.

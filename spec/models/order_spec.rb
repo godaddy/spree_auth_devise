@@ -1,4 +1,4 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 describe Spree::Order do
   let(:order) { described_class.new }

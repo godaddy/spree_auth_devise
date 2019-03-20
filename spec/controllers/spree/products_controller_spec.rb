@@ -1,4 +1,4 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 describe Spree::ProductsController do
   let!(:product) { create(:product, available_on: 1.year.from_now) }
