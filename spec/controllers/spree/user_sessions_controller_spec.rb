@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-describe Spree::UserSessionsController do
-  let(:user) { create(:user) }
+RSpec.describe Spree::UserSessionsController do
+  let(:user) { FactoryBot.create(:user) }
   before do
     @request.env["devise.mapping"] = Devise.mappings[:spree_user]
   end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Spree::UserPasswordsController do
+RSpec.describe Spree::UserPasswordsController do
   let(:token) { 'some_token' }
 
   before do

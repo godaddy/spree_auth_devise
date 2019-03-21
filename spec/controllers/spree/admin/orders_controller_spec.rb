@@ -2,7 +2,7 @@
 
 module Spree
   module Admin
-    describe OrdersController do
+    RSpec.describe OrdersController do
       stub_authorization!
 
       context '#authorize_admin' do

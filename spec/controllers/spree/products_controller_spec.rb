@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-describe Spree::ProductsController do
-  let!(:product) { create(:product, available_on: 1.year.from_now) }
+RSpec.describe Spree::ProductsController do
+  let!(:product) { FactoryBot.create(:product, available_on: 1.year.from_now) }
   let!(:user)    { mock_model(Spree::User, spree_api_key: 'fake', last_incomplete_spree_order: nil) }
 
   it 'allows admins to view non-active products' do

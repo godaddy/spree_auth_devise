@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-describe Spree::UsersController do
-  let(:admin_user) { create(:user) }
-  let(:user) { create(:user) }
-  let(:role) { create(:role) }
+RSpec.describe Spree::UsersController do
+  let(:admin_user) { FactoryBot.create(:user) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:role) { FactoryBot.create(:role) }
 
   before do
     allow(controller).to receive(:spree_current_user).and_return(user)
