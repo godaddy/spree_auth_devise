@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Spree::Core::Engine.add_routes do
   devise_for :spree_user,
              :class_name => 'Spree::User',
