@@ -1,4 +1,6 @@
-# encoding: UTF-8
+# frozen_string_literal: true
+
+$:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
@@ -11,12 +13,10 @@ Gem::Specification.new do |s|
   s.author      = 'Sean Schofield'
   s.email       = 'sean@spreecommerce.com'
   s.homepage    = 'http://spreecommerce.com'
-  s.license     = %q{BSD-3}
+  s.license     = 'BSD-3'
 
-  s.files        = `git ls-files`.split("\n")
-  s.test_files   = `git ls-files -- spec/*`.split("\n")
-  s.require_path = 'lib'
-  s.requirements << 'none'
+  s.files        = Dir['{app,config,db,lib}/**/*', 'Rakefile', 'README.md']
+  s.require_paths = ['lib']
 
   spree_version = '~> 3.0.0'
   s.add_dependency 'spree_core', spree_version
