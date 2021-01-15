@@ -18,7 +18,7 @@ module Spree
     users_table_name = User.table_name
     roles_table_name = Role.table_name
 
-    scope :admin, -> { includes(:spree_roles).where("#{roles_table_name}.name" => "admin") }
+    scope :admin, -> { includes(:spree_roles).where("#{roles_table_name}.name" => 'admin') }
 
     class DestroyWithOrdersError < StandardError; end
 
@@ -31,6 +31,7 @@ module Spree
     end
 
     protected
+
       def password_required?
         !persisted? || password.present? || password_confirmation.present?
       end

@@ -13,7 +13,6 @@ class Spree::Admin::UserPasswordsController < Devise::PasswordsController
 
   ssl_required
 
-  # Fixes spree/spree#2190.
   def update
     if params[:spree_user][:password].blank?
       set_flash_message(:error, :cannot_be_blank)
@@ -22,5 +21,4 @@ class Spree::Admin::UserPasswordsController < Devise::PasswordsController
       super
     end
   end
-
 end

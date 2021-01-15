@@ -37,6 +37,7 @@ class Spree::Admin::UserSessionsController < Devise::SessionsController
   end
 
   private
+
     def accurate_title
       Spree.t(:login)
     end

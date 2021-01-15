@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Spree::UsersController do
+RSpec.describe Spree::Admin::UsersController do
   let(:admin_user) { FactoryBot.create(:user) }
   let(:user) { FactoryBot.create(:user) }
   let(:role) { FactoryBot.create(:role) }
